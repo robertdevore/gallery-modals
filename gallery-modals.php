@@ -59,6 +59,8 @@ function gm_add_modal_to_footer() {
         <div class="gallery-modal-content">
             <span class="gallery-close">&times;</span>
             <img id="gallery-modal-image" src="" alt="" />
+            <h2 id="gallery-modal-title"></h2>
+            <p id="gallery-modal-description"></p>
             <?php if ( apply_filters( 'show_gallery_download_button', true ) ) : ?>
                 <a id="gallery-download-link" href="" download><?php esc_html_e( 'Download', 'gallery-modals' ); ?></a>
             <?php endif; ?>
@@ -81,12 +83,17 @@ function gm_add_image_attributes( $html, $id, $size, $icon, $attr ) {
     // Get the image and attachment URLs.
     $image_url      = wp_get_attachment_url( $id );
     $attachment_url = get_attachment_link( $id );
+    $image_title    = get_the_title( $id );
+    $image_desc     = wp_strip_all_tags( get_post_field( 'post_content', $id ) );
 
     // Add data attributes for the modal functionality.
-    $html = str_replace( '<img', '<img data-modal-url="' . esc_url( $image_url ) . '" data-attachment-url="' . esc_url( $attachment_url ) . '"', $html );
+    $html = str_replace(
+        '<img',
+        '<img data-modal-url="' . esc_url( $image_url ) . '" data-attachment-url="' . esc_url( $attachment_url ) . '" data-title="' . esc_attr( $image_title ) . '" data-description="' . esc_attr( $image_desc ) . '"',
+        $html
+    );
     return $html;
 }
-add_filter( 'wp_get_attachment_image', 'gm_add_image_attributes', 10, 5 );
 
 /**
  * Filter block gallery output and add necessary data attributes to images.
@@ -101,23 +108,42 @@ add_filter( 'wp_get_attachment_image', 'gm_add_image_attributes', 10, 5 );
  */
 function gm_modify_block_gallery_output( $block_content, $block ) {
     // Check if the block is a gallery block.
-    if ( 'core/gallery' === $block['blockName'] && ! empty( $block['innerBlocks'] ) ) {
-        // Load each image in the gallery block and add data attributes.
-        foreach ( $block['innerBlocks'] as $inner_block ) {
-            if ( isset( $inner_block['attrs']['id'] ) ) {
-                $image_id       = $inner_block['attrs']['id'];
+    if ( 'core/gallery' === $block['blockName'] ) {
+        // Load the block content into DOMDocument.
+        libxml_use_internal_errors( true );
+        $dom = new DOMDocument();
+        $dom->loadHTML( mb_convert_encoding( $block_content, 'HTML-ENTITIES', 'UTF-8' ) );
+        libxml_clear_errors();
+
+        // Get all <img> elements.
+        $images = $dom->getElementsByTagName( 'img' );
+
+        foreach ( $images as $img ) {
+            // Get the class attribute to find the image ID.
+            $class = $img->getAttribute( 'class' );
+
+            if ( preg_match( '/wp-image-(\d+)/', $class, $matches ) ) {
+                $image_id = $matches[1];
+
                 $image_url      = wp_get_attachment_url( $image_id );
                 $attachment_url = get_attachment_link( $image_id );
+                $image_title    = get_the_title( $image_id );
+                $image_desc     = wp_strip_all_tags( get_post_field( 'post_content', $image_id ) );
 
-                // Replace the <img> tag with the necessary data attributes.
-                $block_content = str_replace(
-                    'wp-image-' . $image_id,
-                    'wp-image-' . $image_id . '" data-modal-url="' . esc_url( $image_url ) . '" data-attachment-url="' . esc_url( $attachment_url ),
-                    $block_content
-                );
+                // Set data attributes.
+                $img->setAttribute( 'data-modal-url', esc_url( $image_url ) );
+                $img->setAttribute( 'data-attachment-url', esc_url( $attachment_url ) );
+                $img->setAttribute( 'data-title', esc_attr( $image_title ) );
+                $img->setAttribute( 'data-description', esc_attr( $image_desc ) );
             }
         }
+
+        // Save the updated HTML.
+        $block_content = $dom->saveHTML( $dom->getElementsByTagName( 'body' )->item( 0 ) );
+        // Remove <body> tags.
+        $block_content = preg_replace( '/^<body>(.*)<\/body>$/is', '$1', $block_content );
     }
+
     return $block_content;
 }
 add_filter( 'render_block', 'gm_modify_block_gallery_output', 10, 2 );

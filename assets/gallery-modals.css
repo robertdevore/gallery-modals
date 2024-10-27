@@ -65,3 +65,22 @@
 #gallery-details-link:hover {
     background-color: #005177;
 }
+
+/* Modal title */
+#gallery-modal-title {
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: inherit;
+}
+
+/* Modal description */
+#gallery-modal-description {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: inherit;
+}
+
+/* Adjust modal content padding if needed */
+.gallery-modal-content {
+    padding: 20px;
+}
