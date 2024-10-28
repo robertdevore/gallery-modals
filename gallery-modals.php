@@ -444,7 +444,7 @@ function render_gallery_modal_settings_page() {
     ?>
     <div class="wrap">
         <h1><?php esc_html_e( 'Gallery Modal Settings', 'gallery-modals' ); ?></h1>
-        <p><strong>v<?php echo GALLERY_MODALS_VERSION; ?></strong> &middot; <a href="https://robertdevore.com/gallery-modals/" target="_blank"><?php esc_attr_e( 'Documentation', 'gallery-modals' ); ?></a> &middot; <a href="https://robertdevore.com/contact" target="_blank"><?php esc_attr_e( 'Support', 'gallery-modals' ); ?></a></p>
+        <p><strong>v<?php echo GALLERY_MODALS_VERSION; ?></strong> &middot; <a href="https://robertdevore.com/articles/gallery-modals-for-wordpress/" target="_blank"><?php esc_attr_e( 'Documentation', 'gallery-modals' ); ?></a> &middot; <a href="https://robertdevore.com/contact" target="_blank"><?php esc_attr_e( 'Support', 'gallery-modals' ); ?></a></p>
         <hr />
         <form method="post" action="options.php" style="margin-top: 24px;">
             <?php
