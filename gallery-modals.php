@@ -193,16 +193,18 @@ function gallery_modal_register_settings() {
         'gallery_main_text_color'             => '#333333',
         'gallery_button_background_color'     => '#0073aa',
         'gallery_button_text_color'           => '#ffffff',
+        'gallery_close_button_color'          => '#ffffff',
     ];
 
     // Opacity options to register.
     $opacity_options = [
         'gallery_modal_background_opacity'      => '1',
-        'gallery_overlay_background_opacity'    => '0.5',
+        'gallery_overlay_background_opacity'    => '0.8',
         'gallery_title_text_opacity'            => '1',
         'gallery_main_text_opacity'             => '1',
         'gallery_button_background_opacity'     => '1',
         'gallery_button_text_opacity'           => '1',
+        'gallery_close_button_opacity'          => '1',
     ];
 
     // Register each color option.
@@ -241,12 +243,13 @@ function gallery_modal_register_settings() {
 
     // Define color settings.
     $settings = [
-        'gallery_modal_background'   => esc_html__( 'Modal Background', 'gallery-modals' ),
         'gallery_overlay_background' => esc_html__( 'Overlay Background', 'gallery-modals' ),
+        'gallery_modal_background'   => esc_html__( 'Modal Background', 'gallery-modals' ),
         'gallery_title_text'         => esc_html__( 'Title Text', 'gallery-modals' ),
         'gallery_main_text'          => esc_html__( 'Main Text', 'gallery-modals' ),
         'gallery_button_background'  => esc_html__( 'Button Background', 'gallery-modals' ),
         'gallery_button_text'        => esc_html__( 'Button Text', 'gallery-modals' ),
+        'gallery_close_button'       => esc_html__( 'Close Button', 'gallery-modals' ),
     ];
 
     // Output each setting field.
@@ -418,12 +421,13 @@ function render_gallery_modal_settings_page() {
         return "rgba($r, $g, $b, $opacity)";
     }
 
-    $overlay_bg        = get_rgba( 'gallery_overlay_background_color', 'gallery_overlay_background_opacity', '#000000', '0.8' );
-    $modal_bg          = get_rgba( 'gallery_modal_background_color', 'gallery_modal_background_opacity', '#ffffff', '1' );
-    $title_color       = get_rgba( 'gallery_title_text_color', 'gallery_title_text_opacity', '#000000', '1' );
-    $main_text_color   = get_rgba( 'gallery_main_text_color', 'gallery_main_text_opacity', '#333333', '1' );
-    $button_bg         = get_rgba( 'gallery_button_background_color', 'gallery_button_background_opacity', '#0073aa', '1' );
-    $button_text_color = get_rgba( 'gallery_button_text_color', 'gallery_button_text_opacity', '#ffffff', '1' );
+    $overlay_bg         = get_rgba( 'gallery_overlay_background_color', 'gallery_overlay_background_opacity', '#000000', '0.8' );
+    $modal_bg           = get_rgba( 'gallery_modal_background_color', 'gallery_modal_background_opacity', '#ffffff', '1' );
+    $title_color        = get_rgba( 'gallery_title_text_color', 'gallery_title_text_opacity', '#000000', '1' );
+    $main_text_color    = get_rgba( 'gallery_main_text_color', 'gallery_main_text_opacity', '#333333', '1' );
+    $button_bg          = get_rgba( 'gallery_button_background_color', 'gallery_button_background_opacity', '#0073aa', '1' );
+    $button_text_color  = get_rgba( 'gallery_button_text_color', 'gallery_button_text_opacity', '#ffffff', '1' );
+    $close_button_color = get_rgba( 'gallery_close_button_color', 'gallery_close_button_opacity', '#ffffff', '1' );
     ?>
     <div class="wrap">
         <h1><?php esc_html_e( 'Gallery Modal Settings', 'gallery-modals' ); ?></h1>
@@ -441,7 +445,9 @@ function render_gallery_modal_settings_page() {
                 </div>
                 <!-- Preview Section -->
                 <div id="modal-preview" style="flex: 1; padding: 40px; display: flex; align-items: center; justify-content: center; border: 1px solid #ddd; background-color: <?php echo esc_attr( $overlay_bg ); ?>;">
-                    <div class="modal-preview-content" style="padding: 20px; max-width: 300px; text-align: center; background-color: <?php echo esc_attr( $modal_bg ); ?>;">
+                    <div class="modal-preview-content" style="position:relative;padding: 20px; max-width: 300px; text-align: center; background-color: <?php echo esc_attr( $modal_bg ); ?>;">
+                        <!-- Close button -->
+                        <span class="gallery-close" style="color: <?php echo esc_attr( $close_button_color ); ?>;">&times;</span>
                         <h2 style="color: <?php echo esc_attr( $title_color ); ?>;">
                             <?php esc_html_e( 'Modal Title', 'gallery-modals' ); ?>
                         </h2>
@@ -459,7 +465,8 @@ function render_gallery_modal_settings_page() {
                             <?php esc_html_e( 'View Image Details', 'gallery-modals' ); ?>
                         </a>
                     </div>
-                </div>                <style>
+                </div>
+                <style>
                     .modal-wrapper {
                         display: flex;
                         gap: 20px;
@@ -571,12 +578,13 @@ function gallery_modal_inline_styles() {
         return "rgba($r, $g, $b, $opacity)";
     }
 
-    $overlay_bg        = get_rgba( 'gallery_overlay_background_color', 'gallery_overlay_background_opacity', '#000000', '0.5' );
-    $modal_bg          = get_rgba( 'gallery_modal_background_color', 'gallery_modal_background_opacity', '#ffffff', '1' );
-    $title_color       = get_rgba( 'gallery_title_text_color', 'gallery_title_text_opacity', '#000000', '1' );
-    $main_text_color   = get_rgba( 'gallery_main_text_color', 'gallery_main_text_opacity', '#333333', '1' );
-    $button_bg         = get_rgba( 'gallery_button_background_color', 'gallery_button_background_opacity', '#0073aa', '1' );
-    $button_text_color = get_rgba( 'gallery_button_text_color', 'gallery_button_text_opacity', '#ffffff', '1' );
+    $overlay_bg         = get_rgba( 'gallery_overlay_background_color', 'gallery_overlay_background_opacity', '#000000', '0.5' );
+    $modal_bg           = get_rgba( 'gallery_modal_background_color', 'gallery_modal_background_opacity', '#ffffff', '1' );
+    $title_color        = get_rgba( 'gallery_title_text_color', 'gallery_title_text_opacity', '#000000', '1' );
+    $main_text_color    = get_rgba( 'gallery_main_text_color', 'gallery_main_text_opacity', '#333333', '1' );
+    $button_bg          = get_rgba( 'gallery_button_background_color', 'gallery_button_background_opacity', '#0073aa', '1' );
+    $button_text_color  = get_rgba( 'gallery_button_text_color', 'gallery_button_text_opacity', '#ffffff', '1' );
+    $close_button_color = get_rgba( 'gallery_close_button_color', 'gallery_close_button_opacity', '#ffffff', '1' );
     ?>
     <style>
         #gallery-modal {
@@ -598,6 +606,9 @@ function gallery_modal_inline_styles() {
         #gallery-modal a:hover {
             background-color: <?php echo darken_rgba_string( $button_bg , 10 ); ?>;
             color: <?php echo esc_attr( $button_text_color ); ?>;
+        }
+        #gallery-modal .gallery-close {
+            color: <?php echo esc_attr( $close_button_color ); ?>;
         }
     </style>
 

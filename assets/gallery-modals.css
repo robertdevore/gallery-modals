@@ -21,14 +21,15 @@
     text-align: center;
     background-color: #fff;
     border-radius: 8px;
+    position: relative;
 }
 
 /* Close button */
 .gallery-close {
     position: absolute;
     top: -35px;
-    right: 20px;
-    color: #fff;
+    right: 0;
+    color: inherit;
     font-size: 30px;
     font-weight: bold;
     cursor: pointer;
@@ -36,7 +37,6 @@
 
 .gallery-close:hover, 
 .gallery-close:focus {
-    color: #aaa;
     text-decoration: none;
     cursor: pointer;
 }
