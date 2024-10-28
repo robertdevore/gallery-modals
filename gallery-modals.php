@@ -612,7 +612,6 @@ function gallery_modal_inline_styles() {
         }
     </style>
 
-    <?php echo esc_attr( $button_bg ); ?>
     <?php
 }
 add_action( 'wp_head', 'gallery_modal_inline_styles' );
