@@ -285,6 +285,7 @@ function render_gallery_modal_settings_page() {
         <h1><?php esc_html_e( 'Gallery Modal Settings', 'gallery-modals' ); ?></h1>
         <form method="post" action="options.php">
             <?php
+            settings_errors();
             settings_fields( 'gallery_modal_settings' );
             ?>
             <div class="modal-wrapper">
