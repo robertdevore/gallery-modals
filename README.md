@@ -13,13 +13,8 @@ Gallery Modals is a WordPress plugin that adds modal popups to gallery images, p
     - [Color and Opacity Settings](#color-and-opacity-settings)
     - [Display Settings](#display-settings)
     - [Real-Time Preview](#real-time-preview)
-- [Customization](#customization)
-    - [Styling](#styling)
-    - [JavaScript](#javascript)
 - [Contributing](#contributing)
 - [License](#license)
-- [Credits](#credits)
-- [Support](#support)
 
 ## Features
 
