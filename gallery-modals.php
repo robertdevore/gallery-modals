@@ -18,12 +18,25 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: gallery-modals
  * Domain Path: /languages
+ * Update URI:  https://github.com/robertdevore/gallery-modals/
  */
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
     die;
 }
+
+require 'plugin-update-checker/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://github.com/robertdevore/gallery-modals/',
+	__FILE__,
+	'gallery-modals'
+);
+
+// Set the branch that contains the stable release.
+$myUpdateChecker->setBranch( 'main' );
 
 /**
  * Current plugin version.
