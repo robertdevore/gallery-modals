@@ -1,17 +1,22 @@
 jQuery(document).ready(function($) {
-    // Initialize color pickers
+    // Initialize color pickers with change and clear callbacks
     $('.color-picker').wpColorPicker({
         change: function(event, ui) {
-            updatePreview($(event.target));
+            updatePreview($(this));
         },
-        clear: function(event) {
-            updatePreview($(event.target));
+        clear: function() {
+            updatePreview($(this));
         }
     });
 
     // Listen for opacity changes
     $('input[type="number"][name$="_opacity"]').on('input', function() {
         updatePreview($(this));
+    });
+
+    // Listen for changes on the display settings checkboxes
+    $('input[type="checkbox"][name^="gallery_modal_hide_"]').on('change', function() {
+        updateVisibility();
     });
 
     function updatePreview(element) {
@@ -36,10 +41,12 @@ jQuery(document).ready(function($) {
                 $('#modal-preview p').css('color', rgbaColor);
                 break;
             case 'gallery_button_background':
-                $('#modal-preview #gallery-download-link').css('background-color', rgbaColor);
+                // Update both buttons' background color
+                $('#modal-preview #gallery-download-link, #modal-preview #gallery-details-link').css('background-color', rgbaColor);
                 break;
             case 'gallery_button_text':
-                $('#modal-preview #gallery-download-link').css('color', rgbaColor);
+                // Update both buttons' text color
+                $('#modal-preview #gallery-download-link, #modal-preview #gallery-details-link').css('color', rgbaColor);
                 break;
         }
     }
@@ -64,6 +71,37 @@ jQuery(document).ready(function($) {
         return 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
     }
 
+    // Function to update the visibility of elements based on checkboxes
+    function updateVisibility() {
+        // Title
+        if ($('input[name="gallery_modal_hide_title"]').is(':checked')) {
+            $('#modal-preview h2').hide();
+        } else {
+            $('#modal-preview h2').show();
+        }
+
+        // Description
+        if ($('input[name="gallery_modal_hide_description"]').is(':checked')) {
+            $('#modal-preview p').hide();
+        } else {
+            $('#modal-preview p').show();
+        }
+
+        // Download Button
+        if ($('input[name="gallery_modal_hide_download_button"]').is(':checked')) {
+            $('#modal-preview #gallery-download-link').hide();
+        } else {
+            $('#modal-preview #gallery-download-link').show();
+        }
+
+        // View Details Button
+        if ($('input[name="gallery_modal_hide_details_button"]').is(':checked')) {
+            $('#modal-preview #gallery-details-link').hide();
+        } else {
+            $('#modal-preview #gallery-details-link').show();
+        }
+    }
+
     // Initialize preview on page load
     $('.color-picker').each(function() {
         updatePreview($(this));
@@ -71,4 +109,7 @@ jQuery(document).ready(function($) {
     $('input[type="number"][name$="_opacity"]').each(function() {
         updatePreview($(this));
     });
+
+    // Initialize visibility on page load
+    updateVisibility();
 });

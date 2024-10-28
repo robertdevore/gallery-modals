@@ -54,17 +54,25 @@ add_action( 'wp_enqueue_scripts', 'gm_enqueue_modal_scripts' );
  * @return void
  */
 function gm_add_modal_to_footer() {
+    $hide_title           = get_option( 'gallery_modal_hide_title', '0' );
+    $hide_description     = get_option( 'gallery_modal_hide_description', '0' );
+    $hide_download_button = get_option( 'gallery_modal_hide_download_button', '0' );
+    $hide_details_button  = get_option( 'gallery_modal_hide_details_button', '0' );
     ?>
     <div id="gallery-modal" class="gallery-modal">
         <div class="gallery-modal-content">
             <span class="gallery-close">&times;</span>
             <img id="gallery-modal-image" src="" alt="" />
-            <h2 id="gallery-modal-title"></h2>
-            <p id="gallery-modal-description"></p>
-            <?php if ( apply_filters( 'show_gallery_download_button', true ) ) : ?>
+            <?php if ( ! $hide_title ) : ?>
+                <h2 id="gallery-modal-title"></h2>
+            <?php endif; ?>
+            <?php if ( ! $hide_description ) : ?>
+                <p id="gallery-modal-description"></p>
+            <?php endif; ?>
+            <?php if ( ! $hide_download_button ) : ?>
                 <a id="gallery-download-link" href="" download><?php esc_html_e( 'Download', 'gallery-modals' ); ?></a>
             <?php endif; ?>
-            <?php if ( apply_filters( 'show_gallery_details_button', true ) ) : ?>
+            <?php if ( ! $hide_details_button ) : ?>
                 <a id="gallery-details-link" href="" target="_blank"><?php esc_html_e( 'View Image Details', 'gallery-modals' ); ?></a>
             <?php endif; ?>
         </div>
@@ -167,7 +175,7 @@ function gallery_modal_settings_page() {
 add_action( 'admin_menu', 'gallery_modal_settings_page' );
 
 /**
- * Register settings for color and opacity options.
+ * Register settings for color, opacity, and display options.
  *
  * @since 1.0.0
  * @return void
@@ -223,7 +231,7 @@ function gallery_modal_register_settings() {
         );
     }
 
-    // Add settings section.
+    // Add settings section for colors.
     add_settings_section(
         'gallery_modal_main_section',
         esc_html__( 'Color and Opacity Settings', 'gallery-modals' ),
@@ -231,7 +239,7 @@ function gallery_modal_register_settings() {
         $option_page
     );
 
-    // Define settings.
+    // Define color settings.
     $settings = [
         'gallery_modal_background'   => esc_html__( 'Modal Background', 'gallery-modals' ),
         'gallery_overlay_background' => esc_html__( 'Overlay Background', 'gallery-modals' ),
@@ -258,18 +266,85 @@ function gallery_modal_register_settings() {
             ]
         );
     }
+
+    // Register new display options.
+    $display_options = [
+        'gallery_modal_hide_title'            => '0',
+        'gallery_modal_hide_description'      => '0',
+        'gallery_modal_hide_download_button'  => '0',
+        'gallery_modal_hide_details_button'   => '0',
+    ];
+
+    foreach ( $display_options as $option_name => $default_value ) {
+        register_setting(
+            $option_group,
+            $option_name,
+            [
+                'type'              => 'boolean',
+                'default'           => $default_value,
+                'sanitize_callback' => 'absint',
+            ]
+        );
+    }
+
+    // Add new settings section for display options.
+    add_settings_section(
+        'gallery_modal_display_section',
+        esc_html__( 'Display Settings', 'gallery-modals' ),
+        'gallery_modal_display_section_callback',
+        $option_page
+    );
+
+    // Add settings fields for display options.
+    foreach ( $display_options as $option_name => $default_value ) {
+        $field_label = '';
+
+        switch ( $option_name ) {
+            case 'gallery_modal_hide_title':
+                $field_label = esc_html__( 'Hide Modal Title', 'gallery-modals' );
+                break;
+            case 'gallery_modal_hide_description':
+                $field_label = esc_html__( 'Hide Modal Description', 'gallery-modals' );
+                break;
+            case 'gallery_modal_hide_download_button':
+                $field_label = esc_html__( 'Hide Download Button', 'gallery-modals' );
+                break;
+            case 'gallery_modal_hide_details_button':
+                $field_label = esc_html__( 'Hide View Details Button', 'gallery-modals' );
+                break;
+        }
+
+        add_settings_field(
+            $option_name,
+            $field_label,
+            'gallery_modal_checkbox_callback',
+            $option_page,
+            'gallery_modal_display_section',
+            [
+                'label_for'   => $option_name,
+                'option_name' => $option_name,
+            ]
+        );
+    }
 }
 add_action( 'admin_init', 'gallery_modal_register_settings' );
 
 /**
- * Section callback function.
+ * Section callback function for color settings.
  */
 function gallery_modal_section_callback() {
     echo '<p>' . esc_html__( 'Customize the appearance of your gallery modals.', 'gallery-modals' ) . '</p>';
 }
 
 /**
- * Field callback function.
+ * Section callback function for display settings.
+ */
+function gallery_modal_display_section_callback() {
+    echo '<p>' . esc_html__( 'Control the visibility of elements in the modal.', 'gallery-modals' ) . '</p>';
+}
+
+/**
+ * Field callback function for color and opacity settings.
  */
 function gallery_modal_field_callback( $args ) {
     $color_option   = $args['color_option'];
@@ -281,6 +356,15 @@ function gallery_modal_field_callback( $args ) {
     echo '<input type="text" name="' . esc_attr( $color_option ) . '" value="' . esc_attr( $color_value ) . '" class="color-picker" />';
     echo '<label for="' . esc_attr( $opacity_option ) . '"> ' . esc_html__( 'Opacity:', 'gallery-modals' ) . ' </label>';
     echo '<input type="number" name="' . esc_attr( $opacity_option ) . '" value="' . esc_attr( $opacity_value ) . '" min="0" max="1" step="0.01" style="width: 60px;" />';
+}
+
+/**
+ * Field callback function for display settings checkboxes.
+ */
+function gallery_modal_checkbox_callback( $args ) {
+    $option_name = $args['option_name'];
+    $checked     = get_option( $option_name, '0' );
+    echo '<input type="checkbox" id="' . esc_attr( $option_name ) . '" name="' . esc_attr( $option_name ) . '" value="1"' . checked( 1, $checked, false ) . ' />';
 }
 
 /**
@@ -334,7 +418,7 @@ function render_gallery_modal_settings_page() {
         return "rgba($r, $g, $b, $opacity)";
     }
 
-    $overlay_bg        = get_rgba( 'gallery_overlay_background_color', 'gallery_overlay_background_opacity', '#000000', '0.5' );
+    $overlay_bg        = get_rgba( 'gallery_overlay_background_color', 'gallery_overlay_background_opacity', '#000000', '0.8' );
     $modal_bg          = get_rgba( 'gallery_modal_background_color', 'gallery_modal_background_opacity', '#ffffff', '1' );
     $title_color       = get_rgba( 'gallery_title_text_color', 'gallery_title_text_opacity', '#000000', '1' );
     $main_text_color   = get_rgba( 'gallery_main_text_color', 'gallery_main_text_opacity', '#333333', '1' );
@@ -343,17 +427,18 @@ function render_gallery_modal_settings_page() {
     ?>
     <div class="wrap">
         <h1><?php esc_html_e( 'Gallery Modal Settings', 'gallery-modals' ); ?></h1>
-        <hr />
-        <div class="modal-wrapper">
-            <form method="post" action="options.php">
-                <?php
-                settings_errors();
-                settings_fields( 'gallery_modal_settings_group' );
-                do_settings_sections( 'gallery-modals-settings' );
-                submit_button();
-                ?>
-            </form>
+        <form method="post" action="options.php">
+            <?php
+            settings_errors();
+            settings_fields( 'gallery_modal_settings_group' );
+            ?>
             <div class="modal-wrapper">
+                <div style="flex: 1;">
+                    <?php
+                    do_settings_sections( 'gallery-modals-settings' );
+                    submit_button();
+                    ?>
+                </div>
                 <!-- Preview Section -->
                 <div id="modal-preview" style="flex: 1; padding: 40px; display: flex; align-items: center; justify-content: center; border: 1px solid #ddd; background-color: <?php echo esc_attr( $overlay_bg ); ?>;">
                     <div class="modal-preview-content" style="padding: 20px; max-width: 300px; text-align: center; background-color: <?php echo esc_attr( $modal_bg ); ?>;">
@@ -364,17 +449,20 @@ function render_gallery_modal_settings_page() {
                             <?php esc_html_e( 'This is a preview of the modal text.', 'gallery-modals' ); ?>
                         </p>
                         <a href="#" id="gallery-download-link"
-                            style="background-color: <?php echo esc_attr( $button_bg ); ?>;
-                                    color: <?php echo esc_attr( $button_text_color ); ?>;">
+                        style="background-color: <?php echo esc_attr( $button_bg ); ?>;
+                                color: <?php echo esc_attr( $button_text_color ); ?>;">
                             <?php esc_html_e( 'Download', 'gallery-modals' ); ?>
                         </a>
+                        <a href="#" id="gallery-details-link"
+                        style="background-color: <?php echo esc_attr( $button_bg ); ?>;
+                                color: <?php echo esc_attr( $button_text_color ); ?>;">
+                            <?php esc_html_e( 'View Image Details', 'gallery-modals' ); ?>
+                        </a>
                     </div>
-                </div>
-                <style>
+                </div>                <style>
                     .modal-wrapper {
                         display: flex;
                         gap: 20px;
-                        flex: 1;
                     }
                     @media (max-width: 768px) {
                         .modal-wrapper {
@@ -386,7 +474,7 @@ function render_gallery_modal_settings_page() {
                     }
                 </style>
             </div>
-        </div>
+        </form>
     </div>
     <?php
 }
@@ -507,7 +595,52 @@ function gallery_modal_inline_styles() {
             background-color: <?php echo esc_attr( $button_bg ); ?>;
             color: <?php echo esc_attr( $button_text_color ); ?>;
         }
+        #gallery-modal a:hover {
+            background-color: <?php echo darken_rgba_string( $button_bg , 10 ); ?>;
+            color: <?php echo esc_attr( $button_text_color ); ?>;
+        }
     </style>
+
+    <?php echo esc_attr( $button_bg ); ?>
     <?php
 }
 add_action( 'wp_head', 'gallery_modal_inline_styles' );
+
+/**
+ * Darken an RGBA color by a given percentage.
+ *
+ * This function takes an rgba color string as input, parses the RGBA values,
+ * darkens the color by the specified percentage, and returns the adjusted color.
+ *
+ * @param string $rgba    The original color in rgba format (e.g., "rgba(221, 51, 51, 1)").
+ * @param float  $percent The percentage to darken the color (e.g., 10 for 10% darker).
+ * @return string The darkened color in rgba format.
+ */
+function darken_rgba_string( $rgba, $percent ) {
+    // Validate input to ensure it is a string
+    if ( ! is_string( $rgba ) ) {
+        return esc_html__( 'Invalid input color format', 'your-text-domain' );
+    }
+
+    // Use regular expression to extract RGBA values
+    preg_match( '/rgba?\((\d+),\s*(\d+),\s*(\d+),\s*([01]?\.?\d*)\)/', $rgba, $matches );
+
+    // Check if matches were found, return original color if parsing fails
+    if ( empty( $matches ) ) {
+        return esc_html( $rgba );
+    }
+
+    // Parse and sanitize the RGBA values
+    $r = max( 0, min( 255, (int) $matches[1] ) );
+    $g = max( 0, min( 255, (int) $matches[2] ) );
+    $b = max( 0, min( 255, (int) $matches[3] ) );
+    $a = max( 0, min( 1, (float) $matches[4] ) );
+
+    // Calculate the darker color by reducing each RGB channel by the given percentage
+    $r = max( 0, min( 255, $r - ( $r * $percent / 100 ) ) );
+    $g = max( 0, min( 255, $g - ( $g * $percent / 100 ) ) );
+    $b = max( 0, min( 255, $b - ( $b * $percent / 100 ) ) );
+
+    // Return the darkened color in rgba format, with proper escaping for localization
+    return esc_html( sprintf( 'rgba(%d, %d, %d, %.2f)', round( $r ), round( $g ), round( $b ), $a ) );
+}
