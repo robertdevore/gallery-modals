@@ -431,7 +431,9 @@ function render_gallery_modal_settings_page() {
     ?>
     <div class="wrap">
         <h1><?php esc_html_e( 'Gallery Modal Settings', 'gallery-modals' ); ?></h1>
-        <form method="post" action="options.php">
+        <p><strong>v<?php echo GALLERY_MODALS_VERSION; ?></strong> &middot; <a href="https://robertdevore.com/gallery-modals/" target="_blank"><?php esc_attr_e( 'Documentation', 'gallery-modals' ); ?></a> &middot; <a href="https://robertdevore.com/contact" target="_blank"><?php esc_attr_e( 'Support', 'gallery-modals' ); ?></a></p>
+        <hr />
+        <form method="post" action="options.php" style="margin-top: 24px;">
             <?php
             settings_errors();
             settings_fields( 'gallery_modal_settings_group' );
@@ -448,6 +450,7 @@ function render_gallery_modal_settings_page() {
                     <div class="modal-preview-content" style="position:relative;padding: 20px; max-width: 300px; text-align: center; background-color: <?php echo esc_attr( $modal_bg ); ?>;">
                         <!-- Close button -->
                         <span class="gallery-close" style="color: <?php echo esc_attr( $close_button_color ); ?>;">&times;</span>
+                        <img src="<?php echo esc_url( plugin_dir_url( __FILE__ ) . 'assets/modal-preview.webp' ); ?>" alt="<?php esc_attr_e( 'Modal Preview Image', 'gallery-modals' ); ?>" style="max-width: 100%; height: auto; margin-bottom: 20px;">
                         <h2 style="color: <?php echo esc_attr( $title_color ); ?>;">
                             <?php esc_html_e( 'Modal Title', 'gallery-modals' ); ?>
                         </h2>
