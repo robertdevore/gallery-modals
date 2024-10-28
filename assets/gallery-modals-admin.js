@@ -19,14 +19,18 @@ jQuery(document).ready(function($) {
         updateVisibility();
     });
 
-    function updatePreview(element) {
+    function updatePreview(element, newColor = null) {
         let name = element.attr('name');
         let baseName = name.replace('_color', '').replace('_opacity', '');
-        let color = $('input[name="' + baseName + '_color"]').val() || '#000000';
+        let color = newColor || $('input[name="' + baseName + '_color"]').val() || '#000000';
         let opacity = $('input[name="' + baseName + '_opacity"]').val() || '1';
-
+    
+        console.log('Updating preview for:', baseName);
+        console.log('Color:', color);
+        console.log('Opacity:', opacity);
+    
         let rgbaColor = hexToRgba(color, opacity);
-
+    
         switch (baseName) {
             case 'gallery_modal_background':
                 $('#modal-preview .modal-preview-content').css('background-color', rgbaColor);
@@ -41,13 +45,17 @@ jQuery(document).ready(function($) {
                 $('#modal-preview p').css('color', rgbaColor);
                 break;
             case 'gallery_button_background':
-                // Update both buttons' background color
                 $('#modal-preview #gallery-download-link, #modal-preview #gallery-details-link').css('background-color', rgbaColor);
                 break;
             case 'gallery_button_text':
-                // Update both buttons' text color
                 $('#modal-preview #gallery-download-link, #modal-preview #gallery-details-link').css('color', rgbaColor);
                 break;
+            case 'gallery_close_button':
+                console.log('Updating close button color');
+                $('#modal-preview .gallery-close').css('color', rgbaColor);
+                break;
+            default:
+                console.log('No matching case for:', baseName);
         }
     }
 
