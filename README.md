@@ -1,5 +1,5 @@
 # Gallery Modals for WordPress®
-Gallery Modals is a WordPress plugin that adds modal popups to gallery images, providing a download button and a link to view image details. Enhance your website's user experience by allowing visitors to interact with gallery images in a more engaging and interactive way.
+Gallery Modals is a free WordPress® plugin that adds modal popups to gallery images, providing a download button and a link to view image details. Enhance your website's user experience by allowing visitors to interact with gallery images in a more engaging and interactive way.
 
 ## Table of Contents
 
