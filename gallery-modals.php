@@ -50,13 +50,39 @@ define( 'GALLERY_MODALS_VERSION', '1.0.0' );
  * @return void
  */
 function gm_enqueue_modal_scripts() {
-    // Register and enqueue JS file.
-    wp_register_script( 'gm-modal-js', plugin_dir_url( __FILE__ ) . 'assets/gallery-modals.js', [ 'jquery' ], GALLERY_MODALS_VERSION, true );
-    wp_enqueue_script( 'gm-modal-js' );
+    $should_enqueue = false;
 
-    // Register and enqueue CSS file.
-    wp_register_style( 'gallery-modals-css', plugin_dir_url( __FILE__ ) . 'assets/gallery-modals.css', [], GALLERY_MODALS_VERSION );
-    wp_enqueue_style( 'gallery-modals-css' );
+    // Check if we're on a page with posts (archives, blog index, search results, etc.)
+    global $wp_query;
+
+    // First, check for singular pages.
+    if ( is_singular() && isset( $GLOBALS['post'] ) ) {
+        $post_content = $GLOBALS['post']->post_content;
+        if ( has_shortcode( $post_content, 'gallery' ) || has_block( 'gallery', $post_content ) ) {
+            $should_enqueue = true;
+        }
+    } else {
+        // For non-singular pages, loop through each post in the main query.
+        if ( isset( $wp_query->posts ) && ! empty( $wp_query->posts ) ) {
+            foreach ( $wp_query->posts as $post ) {
+                if ( has_shortcode( $post->post_content, 'gallery' ) || has_block( 'gallery', $post->post_content ) ) {
+                    $should_enqueue = true;
+                    break; // No need to check further if one gallery is found.
+                }
+            }
+        }
+    }
+
+    // Enqueue assets if a gallery was detected.
+    if ( $should_enqueue ) {
+        // Register and enqueue JS file.
+        wp_register_script( 'gm-modal-js', plugin_dir_url( __FILE__ ) . 'assets/gallery-modals.js', [ 'jquery' ], GALLERY_MODALS_VERSION, true );
+        wp_enqueue_script( 'gm-modal-js' );
+
+        // Register and enqueue CSS file.
+        wp_register_style( 'gallery-modals-css', plugin_dir_url( __FILE__ ) . 'assets/gallery-modals.css', [], GALLERY_MODALS_VERSION );
+        wp_enqueue_style( 'gallery-modals-css' );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'gm_enqueue_modal_scripts' );
 
