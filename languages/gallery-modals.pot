@@ -1,0 +1,191 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Gallery Modals\n"
+"POT-Creation-Date: 2025-02-03 01:19-0500\n"
+"PO-Revision-Date: 2025-02-03 01:19-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: gallery-modals.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: plugin-update-checker/vendor\n"
+"X-Poedit-SearchPathExcluded-2: vendor\n"
+
+#: gallery-modals.php:118 gallery-modals.php:521
+msgid "Download"
+msgstr ""
+
+#: gallery-modals.php:121 gallery-modals.php:526
+msgid "View Image Details"
+msgstr ""
+
+#: gallery-modals.php:211
+msgid "Gallery Modals Settings"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+#: gallery-modals.php:212
+msgid "Gallery Modals"
+msgstr ""
+
+#: gallery-modals.php:284
+msgid "Color and Opacity Settings"
+msgstr ""
+
+#: gallery-modals.php:291
+msgid "Overlay Background"
+msgstr ""
+
+#: gallery-modals.php:292
+msgid "Modal Background"
+msgstr ""
+
+#: gallery-modals.php:293
+msgid "Title Text"
+msgstr ""
+
+#: gallery-modals.php:294
+msgid "Main Text"
+msgstr ""
+
+#: gallery-modals.php:295
+msgid "Button Background"
+msgstr ""
+
+#: gallery-modals.php:296
+msgid "Button Text"
+msgstr ""
+
+#: gallery-modals.php:297
+msgid "Close Button"
+msgstr ""
+
+#: gallery-modals.php:341
+msgid "Display Settings"
+msgstr ""
+
+#: gallery-modals.php:352
+msgid "Hide Modal Title"
+msgstr ""
+
+#: gallery-modals.php:355
+msgid "Hide Modal Description"
+msgstr ""
+
+#: gallery-modals.php:358
+msgid "Hide Download Button"
+msgstr ""
+
+#: gallery-modals.php:361
+msgid "Hide View Details Button"
+msgstr ""
+
+#: gallery-modals.php:387
+msgid "Customize the appearance of your gallery modals."
+msgstr ""
+
+#: gallery-modals.php:397
+msgid "Control the visibility of elements in the modal."
+msgstr ""
+
+#: gallery-modals.php:413
+msgid "Opacity:"
+msgstr ""
+
+#: gallery-modals.php:491
+msgid "Gallery Modal Settings"
+msgstr ""
+
+#: gallery-modals.php:492
+msgid "Documentation"
+msgstr ""
+
+#: gallery-modals.php:492
+msgid "Support"
+msgstr ""
+
+#: gallery-modals.php:511
+msgid "Modal Preview Image"
+msgstr ""
+
+#: gallery-modals.php:513
+msgid "Modal Title"
+msgstr ""
+
+#: gallery-modals.php:516
+msgid "This is a preview of the modal text."
+msgstr ""
+
+#: gallery-modals.php:700
+msgid "Invalid input color format"
+msgstr ""
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:56
+msgid "View details"
+msgstr ""
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:79
+#, php-format
+msgid "More information about %s"
+msgstr ""
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:130
+msgid "Check for updates"
+msgstr ""
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:217
+#, php-format
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr ""
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:219
+#, php-format
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr ""
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:221
+#, php-format
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr ""
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:227
+#, php-format
+msgid "Unknown update checker status \"%s\""
+msgstr ""
+
+#: plugin-update-checker/Puc/v5p5/Vcs/PluginUpdateChecker.php:113
+msgid "There is no changelog available."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/robertdevore/gallery-modals/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Add modal popups to WordPress® gallery images with a download button and a "
+"link to view image details."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Robert DeVore"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://robertdevore.com/"
+msgstr ""

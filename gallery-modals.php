@@ -11,7 +11,7 @@
  * Plugin Name: Gallery Modals
  * Description: Add modal popups to WordPress® gallery images with a download button and a link to view image details.
  * Plugin URI:  https://github.com/robertdevore/gallery-modals/
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      Robert DeVore
  * Author URI:  https://robertdevore.com/
  * License:     GPL-2.0+
@@ -38,8 +38,31 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 // Set the branch that contains the stable release.
 $myUpdateChecker->setBranch( 'main' );
 
+if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
+
+use RobertDevore\WPComCheck\WPComPluginHandler;
+
+new WPComPluginHandler( plugin_basename( __FILE__ ), 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' );
+
 // Current plugin version.
-define( 'GALLERY_MODALS_VERSION', '1.0.0' );
+define( 'GALLERY_MODALS_VERSION', '1.0.1' );
+
+/**
+ * Load plugin text domain for translations
+ * 
+ * @since 1.0.1
+ * @return void
+ */
+function gallery_modals_wp_load_textdomain() {
+    load_plugin_textdomain( 
+        'gallery-modals', 
+        false, 
+        dirname( plugin_basename( __FILE__ ) ) . '/languages/'
+    );
+}
+add_action( 'plugins_loaded', 'gallery_modals_wp_load_textdomain' );
 
 /**
  * Enqueue necessary scripts and styles for the modal popup.
