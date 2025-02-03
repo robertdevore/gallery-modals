@@ -200,24 +200,24 @@ function gallery_modal_register_settings() {
 
     // Color options to register.
     $color_options = [
-        'gallery_modal_background_color'      => '#ffffff',
-        'gallery_overlay_background_color'    => '#000000',
-        'gallery_title_text_color'            => '#000000',
-        'gallery_main_text_color'             => '#333333',
-        'gallery_button_background_color'     => '#0073aa',
-        'gallery_button_text_color'           => '#ffffff',
-        'gallery_close_button_color'          => '#ffffff',
+        'gallery_modal_background_color'   => '#ffffff',
+        'gallery_overlay_background_color' => '#000000',
+        'gallery_title_text_color'         => '#000000',
+        'gallery_main_text_color'          => '#333333',
+        'gallery_button_background_color'  => '#0073aa',
+        'gallery_button_text_color'        => '#ffffff',
+        'gallery_close_button_color'       => '#ffffff',
     ];
 
     // Opacity options to register.
     $opacity_options = [
-        'gallery_modal_background_opacity'      => '1',
-        'gallery_overlay_background_opacity'    => '0.8',
-        'gallery_title_text_opacity'            => '1',
-        'gallery_main_text_opacity'             => '1',
-        'gallery_button_background_opacity'     => '1',
-        'gallery_button_text_opacity'           => '1',
-        'gallery_close_button_opacity'          => '1',
+        'gallery_modal_background_opacity'   => '1',
+        'gallery_overlay_background_opacity' => '0.8',
+        'gallery_title_text_opacity'         => '1',
+        'gallery_main_text_opacity'          => '1',
+        'gallery_button_background_opacity'  => '1',
+        'gallery_button_text_opacity'        => '1',
+        'gallery_close_button_opacity'       => '1',
     ];
 
     // Register each color option.
@@ -285,10 +285,10 @@ function gallery_modal_register_settings() {
 
     // Register new display options.
     $display_options = [
-        'gallery_modal_hide_title'            => '0',
-        'gallery_modal_hide_description'      => '0',
-        'gallery_modal_hide_download_button'  => '0',
-        'gallery_modal_hide_details_button'   => '0',
+        'gallery_modal_hide_title'           => '0',
+        'gallery_modal_hide_description'     => '0',
+        'gallery_modal_hide_download_button' => '0',
+        'gallery_modal_hide_details_button'  => '0',
     ];
 
     foreach ( $display_options as $option_name => $default_value ) {
@@ -347,6 +347,9 @@ add_action( 'admin_init', 'gallery_modal_register_settings' );
 
 /**
  * Section callback function for color settings.
+ * 
+ * @since  1.0.0
+ * @return void
  */
 function gallery_modal_section_callback() {
     echo '<p>' . esc_html__( 'Customize the appearance of your gallery modals.', 'gallery-modals' ) . '</p>';
@@ -354,6 +357,9 @@ function gallery_modal_section_callback() {
 
 /**
  * Section callback function for display settings.
+ * 
+ * @since  1.0.0
+ * @return void
  */
 function gallery_modal_display_section_callback() {
     echo '<p>' . esc_html__( 'Control the visibility of elements in the modal.', 'gallery-modals' ) . '</p>';
@@ -361,13 +367,15 @@ function gallery_modal_display_section_callback() {
 
 /**
  * Field callback function for color and opacity settings.
+ * 
+ * @since  1.0.0
+ * @return void
  */
 function gallery_modal_field_callback( $args ) {
     $color_option   = $args['color_option'];
     $opacity_option = $args['opacity_option'];
-
-    $color_value   = get_option( $color_option, '#ffffff' );
-    $opacity_value = get_option( $opacity_option, '1' );
+    $color_value    = get_option( $color_option, '#ffffff' );
+    $opacity_value  = get_option( $opacity_option, '1' );
 
     echo '<input type="text" name="' . esc_attr( $color_option ) . '" value="' . esc_attr( $color_value ) . '" class="color-picker" />';
     echo '<label for="' . esc_attr( $opacity_option ) . '"> ' . esc_html__( 'Opacity:', 'gallery-modals' ) . ' </label>';
@@ -376,6 +384,9 @@ function gallery_modal_field_callback( $args ) {
 
 /**
  * Field callback function for display settings checkboxes.
+ * 
+ * @since  1.0.0
+ * @return void
  */
 function gallery_modal_checkbox_callback( $args ) {
     $option_name = $args['option_name'];
@@ -387,6 +398,8 @@ function gallery_modal_checkbox_callback( $args ) {
  * Sanitize opacity values between 0 and 1.
  *
  * @param string $opacity The opacity value to sanitize.
+ * 
+ * @since  1.0.0
  * @return string Sanitized opacity value.
  */
 function gm_sanitize_opacity( $opacity ) {
@@ -504,6 +517,9 @@ function render_gallery_modal_settings_page() {
 
 /**
  * Enqueue the admin JavaScript file for the Gallery Modal settings page.
+ * 
+ * @since  1.0.0
+ * @return void
  */
 function gallery_modal_enqueue_admin_scripts( $hook_suffix ) {
     // Only load on the Gallery Modals settings page.
@@ -529,8 +545,10 @@ add_action( 'admin_enqueue_scripts', 'gallery_modal_enqueue_admin_scripts' );
 /**
  * Enqueue the frontend CSS in the admin for the Gallery Modal settings page.
  *
- * @since 1.0.0
  * @param string $hook_suffix The current admin page.
+ * 
+ * @since  1.0.0
+ * @return void
  */
 function gallery_modal_enqueue_admin_styles( $hook_suffix ) {
     // Only load on the Gallery Modals settings page.
@@ -640,143 +658,35 @@ add_action( 'wp_head', 'gallery_modal_inline_styles' );
  *
  * @param string $rgba    The original color in rgba format (e.g., "rgba(221, 51, 51, 1)").
  * @param float  $percent The percentage to darken the color (e.g., 10 for 10% darker).
+ * 
+ * @since  1.0.0
  * @return string The darkened color in rgba format.
  */
 function darken_rgba_string( $rgba, $percent ) {
-    // Validate input to ensure it is a string
+    // Validate input to ensure it is a string.
     if ( ! is_string( $rgba ) ) {
         return esc_html__( 'Invalid input color format', 'your-text-domain' );
     }
 
-    // Use regular expression to extract RGBA values
+    // Use regular expression to extract RGBA values.
     preg_match( '/rgba?\((\d+),\s*(\d+),\s*(\d+),\s*([01]?\.?\d*)\)/', $rgba, $matches );
 
-    // Check if matches were found, return original color if parsing fails
+    // Check if matches were found, return original color if parsing fails.
     if ( empty( $matches ) ) {
         return esc_html( $rgba );
     }
 
-    // Parse and sanitize the RGBA values
+    // Parse and sanitize the RGBA values.
     $r = max( 0, min( 255, (int) $matches[1] ) );
     $g = max( 0, min( 255, (int) $matches[2] ) );
     $b = max( 0, min( 255, (int) $matches[3] ) );
     $a = max( 0, min( 1, (float) $matches[4] ) );
 
-    // Calculate the darker color by reducing each RGB channel by the given percentage
+    // Calculate the darker color by reducing each RGB channel by the given percentage.
     $r = max( 0, min( 255, $r - ( $r * $percent / 100 ) ) );
     $g = max( 0, min( 255, $g - ( $g * $percent / 100 ) ) );
     $b = max( 0, min( 255, $b - ( $b * $percent / 100 ) ) );
 
-    // Return the darkened color in rgba format, with proper escaping for localization
+    // Return the darkened color in rgba format, with proper escaping for localization.
     return esc_html( sprintf( 'rgba(%d, %d, %d, %.2f)', round( $r ), round( $g ), round( $b ), $a ) );
 }
-
-/**
- * Helper function to handle WordPress.com environment checks.
- *
- * @param string $plugin_slug     The plugin slug.
- * @param string $learn_more_link The link to more information.
- * 
- * @since  1.1.0
- * @return bool
- */
-function wp_com_plugin_check( $plugin_slug, $learn_more_link ) {
-    // Check if the site is hosted on WordPress.com.
-    if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
-        // Ensure the deactivate_plugins function is available.
-        if ( ! function_exists( 'deactivate_plugins' ) ) {
-            require_once ABSPATH . 'wp-admin/includes/plugin.php';
-        }
-
-        // Deactivate the plugin if in the admin area.
-        if ( is_admin() ) {
-            deactivate_plugins( $plugin_slug );
-
-            // Add a deactivation notice for later display.
-            add_option( 'wpcom_deactivation_notice', $learn_more_link );
-
-            // Prevent further execution.
-            return true;
-        }
-    }
-
-    return false;
-}
-
-/**
- * Auto-deactivate the plugin if running in an unsupported environment.
- *
- * @since  1.1.0
- * @return void
- */
-function wpcom_auto_deactivation() {
-    if ( wp_com_plugin_check( plugin_basename( __FILE__ ), 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' ) ) {
-        return; // Stop execution if deactivated.
-    }
-}
-add_action( 'plugins_loaded', 'wpcom_auto_deactivation' );
-
-/**
- * Display an admin notice if the plugin was deactivated due to hosting restrictions.
- *
- * @since  1.1.0
- * @return void
- */
-function wpcom_admin_notice() {
-    $notice_link = get_option( 'wpcom_deactivation_notice' );
-    if ( $notice_link ) {
-        ?>
-        <div class="notice notice-error">
-            <p>
-                <?php
-                echo wp_kses_post(
-                    sprintf(
-                        __( 'My Plugin has been deactivated because it cannot be used on WordPress.com-hosted websites. %s', 'gallery-modals' ),
-                        '<a href="' . esc_url( $notice_link ) . '" target="_blank" rel="noopener">' . __( 'Learn more', 'gallery-modals' ) . '</a>'
-                    )
-                );
-                ?>
-            </p>
-        </div>
-        <?php
-        delete_option( 'wpcom_deactivation_notice' );
-    }
-}
-add_action( 'admin_notices', 'wpcom_admin_notice' );
-
-/**
- * Prevent plugin activation on WordPress.com-hosted sites.
- *
- * @since  1.1.0
- * @return void
- */
-function wpcom_activation_check() {
-    if ( wp_com_plugin_check( plugin_basename( __FILE__ ), 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' ) ) {
-        // Display an error message and stop activation.
-        wp_die(
-            wp_kses_post(
-                sprintf(
-                    '<h1>%s</h1><p>%s</p><p><a href="%s" target="_blank" rel="noopener">%s</a></p>',
-                    __( 'Plugin Activation Blocked', 'gallery-modals' ),
-                    __( 'This plugin cannot be activated on WordPress.com-hosted websites. It is restricted due to concerns about WordPress.com policies impacting the community.', 'gallery-modals' ),
-                    esc_url( 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' ),
-                    __( 'Learn more', 'gallery-modals' )
-                )
-            ),
-            esc_html__( 'Plugin Activation Blocked', 'gallery-modals' ),
-            [ 'back_link' => true ]
-        );
-    }
-}
-register_activation_hook( __FILE__, 'wpcom_activation_check' );
-
-/**
- * Add a deactivation flag when the plugin is deactivated.
- *
- * @since  1.1.0
- * @return void
- */
-function wpcom_deactivation_flag() {
-    add_option( 'wpcom_deactivation_notice', 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' );
-}
-register_deactivation_hook( __FILE__, 'wpcom_deactivation_flag' );
