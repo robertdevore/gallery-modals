@@ -38,9 +38,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 // Set the branch that contains the stable release.
 $myUpdateChecker->setBranch( 'main' );
 
-/**
- * Current plugin version.
- */
+// Current plugin version.
 define( 'GALLERY_MODALS_VERSION', '1.0.0' );
 
 /**
