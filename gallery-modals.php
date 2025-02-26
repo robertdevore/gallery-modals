@@ -206,7 +206,7 @@ function gm_modify_block_gallery_output( $block_content, $block ) {
         // Load the block content into DOMDocument.
         libxml_use_internal_errors( true );
         $dom = new DOMDocument();
-        $dom->loadHTML( mb_convert_encoding( $block_content, 'HTML-ENTITIES', 'UTF-8' ) );
+        $dom->loadHTML('<?xml encoding="UTF-8">' . $block_content);
         libxml_clear_errors();
 
         // Get all <img> elements.
