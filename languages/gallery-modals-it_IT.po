@@ -1,0 +1,193 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Gallery Modals\n"
+"POT-Creation-Date: 2025-02-25 21:15-0500\n"
+"PO-Revision-Date: 2025-02-25 21:15-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: gallery-modals.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: plugin-update-checker/vendor\n"
+"X-Poedit-SearchPathExcluded-2: vendor\n"
+
+#: gallery-modals.php:160 gallery-modals.php:565
+msgid "Download"
+msgstr "Download"
+
+#: gallery-modals.php:163 gallery-modals.php:570
+msgid "View Image Details"
+msgstr "Visualizza dettagli immagine"
+
+#: gallery-modals.php:255
+msgid "Gallery Modals Settings"
+msgstr "Impostazioni delle modalità della galleria"
+
+#. Plugin Name of the plugin/theme
+#: gallery-modals.php:256
+msgid "Gallery Modals"
+msgstr "Galleria Modali"
+
+#: gallery-modals.php:328
+msgid "Color and Opacity Settings"
+msgstr "Impostazioni di colore e opacità"
+
+#: gallery-modals.php:335
+msgid "Overlay Background"
+msgstr "Sovrapposizione dello sfondo"
+
+#: gallery-modals.php:336
+msgid "Modal Background"
+msgstr "Sfondo Modale"
+
+#: gallery-modals.php:337
+msgid "Title Text"
+msgstr "Testo del Titolo"
+
+#: gallery-modals.php:338
+msgid "Main Text"
+msgstr "Testo Principale"
+
+#: gallery-modals.php:339
+msgid "Button Background"
+msgstr "Impostare lo stile di sfondo e il bordo del pulsante"
+
+#: gallery-modals.php:340
+msgid "Button Text"
+msgstr "Testo Pulsante"
+
+#: gallery-modals.php:341
+msgid "Close Button"
+msgstr "Pulsante Chiudi"
+
+#: gallery-modals.php:385
+msgid "Display Settings"
+msgstr "Visuale"
+
+#: gallery-modals.php:396
+msgid "Hide Modal Title"
+msgstr "Nascondi titolo modale"
+
+#: gallery-modals.php:399
+msgid "Hide Modal Description"
+msgstr "Nascondi descrizione modale"
+
+#: gallery-modals.php:402
+msgid "Hide Download Button"
+msgstr "Nascondere il pulsante di download"
+
+#: gallery-modals.php:405
+msgid "Hide View Details Button"
+msgstr "Pulsante Nascondi dettagli di visualizzazione"
+
+#: gallery-modals.php:431
+msgid "Customize the appearance of your gallery modals."
+msgstr "Personalizzare l'aspetto dei modali della galleria."
+
+#: gallery-modals.php:441
+msgid "Control the visibility of elements in the modal."
+msgstr "Controlla la visibilità degli elementi nella finestra modale."
+
+#: gallery-modals.php:457
+msgid "Opacity:"
+msgstr "Opacità:"
+
+#: gallery-modals.php:535
+msgid "Gallery Modal Settings"
+msgstr "Impostazioni della galleria modale"
+
+#: gallery-modals.php:536
+msgid "Documentation"
+msgstr "Documentazione"
+
+#: gallery-modals.php:536
+msgid "Support"
+msgstr "Supporto"
+
+#: gallery-modals.php:555
+msgid "Modal Preview Image"
+msgstr "Immagine di anteprima modale"
+
+#: gallery-modals.php:557
+msgid "Modal Title"
+msgstr "Titolo Modale"
+
+#: gallery-modals.php:560
+msgid "This is a preview of the modal text."
+msgstr "Questa è un'anteprima del testo modale."
+
+#: gallery-modals.php:744
+msgid "Invalid input color format"
+msgstr "Formato colore di ingresso non valido"
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:56
+msgid "View details"
+msgstr "Visualizza i dettagli"
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:79
+#, php-format
+msgid "More information about %s"
+msgstr "Ulteriori informazioni su %s"
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:130
+msgid "Check for updates"
+msgstr "Controlla gli aggiornamenti"
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:217
+#, php-format
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr "Il plugin %s è aggiornato."
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:219
+#, php-format
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr "È disponibile una nuova versione del plugin %s."
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:221
+#, php-format
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr ""
+"Non è stato possibile determinare se è disponibile un aggiornamento di %s."
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:227
+#, php-format
+msgid "Unknown update checker status \"%s\""
+msgstr "Aggiornamento sconosciuto stato checker \"%s\""
+
+#: plugin-update-checker/Puc/v5p5/Vcs/PluginUpdateChecker.php:113
+msgid "There is no changelog available."
+msgstr "La cronologia degli aggiornamenti non è disponibile."
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/robertdevore/gallery-modals/"
+msgstr "https://github.com/robertdevore/gallery-modals/"
+
+#. Description of the plugin/theme
+msgid ""
+"Add modal popups to WordPress® gallery images with a download button and a "
+"link to view image details."
+msgstr ""
+"Aggiungete popup modali alle immagini della galleria di WordPress® con un "
+"pulsante di download e un link per visualizzare i dettagli dell'immagine."
+
+#. Author of the plugin/theme
+msgid "Robert DeVore"
+msgstr "Robert DeVore"
+
+#. Author URI of the plugin/theme
+msgid "https://robertdevore.com/"
+msgstr "https://robertdevore.com/"
