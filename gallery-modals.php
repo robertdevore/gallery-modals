@@ -119,6 +119,31 @@ function gm_add_modal_to_footer() {
     $hide_description     = get_option( 'gallery_modal_hide_description', '0' );
     $hide_download_button = get_option( 'gallery_modal_hide_download_button', '0' );
     $hide_details_button  = get_option( 'gallery_modal_hide_details_button', '0' );
+    $should_enqueue = false;
+
+    // Check if we're on a page with posts (archives, blog index, search results, etc.)
+    global $wp_query;
+
+    // First, check for singular pages.
+    if ( is_singular() && isset( $GLOBALS['post'] ) ) {
+        $post_content = $GLOBALS['post']->post_content;
+        if ( has_shortcode( $post_content, 'gallery' ) || has_block( 'gallery', $post_content ) ) {
+            $should_enqueue = true;
+        }
+    } else {
+        // For non-singular pages, loop through each post in the main query.
+        if ( isset( $wp_query->posts ) && ! empty( $wp_query->posts ) ) {
+            foreach ( $wp_query->posts as $post ) {
+                if ( has_shortcode( $post->post_content, 'gallery' ) || has_block( 'gallery', $post->post_content ) ) {
+                    $should_enqueue = true;
+                    break; // No need to check further if one gallery is found.
+                }
+            }
+        }
+    }
+
+    // Enqueue assets if a gallery was detected.
+    if ( $should_enqueue ) {
     ?>
     <div id="gallery-modal" class="gallery-modal">
         <div class="gallery-modal-content">
@@ -139,6 +164,7 @@ function gm_add_modal_to_footer() {
         </div>
     </div>
     <?php
+    }
 }
 add_action( 'wp_footer', 'gm_add_modal_to_footer' );
 
