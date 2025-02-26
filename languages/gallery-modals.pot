@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gallery Modals\n"
-"POT-Creation-Date: 2025-02-03 01:19-0500\n"
-"PO-Revision-Date: 2025-02-03 01:19-0500\n"
+"POT-Creation-Date: 2025-02-25 21:13-0500\n"
+"PO-Revision-Date: 2025-02-25 21:13-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,112 +23,112 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-1: plugin-update-checker/vendor\n"
 "X-Poedit-SearchPathExcluded-2: vendor\n"
 
-#: gallery-modals.php:118 gallery-modals.php:521
+#: gallery-modals.php:160 gallery-modals.php:565
 msgid "Download"
 msgstr ""
 
-#: gallery-modals.php:121 gallery-modals.php:526
+#: gallery-modals.php:163 gallery-modals.php:570
 msgid "View Image Details"
 msgstr ""
 
-#: gallery-modals.php:211
+#: gallery-modals.php:255
 msgid "Gallery Modals Settings"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-#: gallery-modals.php:212
+#: gallery-modals.php:256
 msgid "Gallery Modals"
 msgstr ""
 
-#: gallery-modals.php:284
+#: gallery-modals.php:328
 msgid "Color and Opacity Settings"
 msgstr ""
 
-#: gallery-modals.php:291
+#: gallery-modals.php:335
 msgid "Overlay Background"
 msgstr ""
 
-#: gallery-modals.php:292
+#: gallery-modals.php:336
 msgid "Modal Background"
 msgstr ""
 
-#: gallery-modals.php:293
+#: gallery-modals.php:337
 msgid "Title Text"
 msgstr ""
 
-#: gallery-modals.php:294
+#: gallery-modals.php:338
 msgid "Main Text"
 msgstr ""
 
-#: gallery-modals.php:295
+#: gallery-modals.php:339
 msgid "Button Background"
 msgstr ""
 
-#: gallery-modals.php:296
+#: gallery-modals.php:340
 msgid "Button Text"
 msgstr ""
 
-#: gallery-modals.php:297
+#: gallery-modals.php:341
 msgid "Close Button"
 msgstr ""
 
-#: gallery-modals.php:341
+#: gallery-modals.php:385
 msgid "Display Settings"
 msgstr ""
 
-#: gallery-modals.php:352
+#: gallery-modals.php:396
 msgid "Hide Modal Title"
 msgstr ""
 
-#: gallery-modals.php:355
+#: gallery-modals.php:399
 msgid "Hide Modal Description"
 msgstr ""
 
-#: gallery-modals.php:358
+#: gallery-modals.php:402
 msgid "Hide Download Button"
 msgstr ""
 
-#: gallery-modals.php:361
+#: gallery-modals.php:405
 msgid "Hide View Details Button"
 msgstr ""
 
-#: gallery-modals.php:387
+#: gallery-modals.php:431
 msgid "Customize the appearance of your gallery modals."
 msgstr ""
 
-#: gallery-modals.php:397
+#: gallery-modals.php:441
 msgid "Control the visibility of elements in the modal."
 msgstr ""
 
-#: gallery-modals.php:413
+#: gallery-modals.php:457
 msgid "Opacity:"
 msgstr ""
 
-#: gallery-modals.php:491
+#: gallery-modals.php:535
 msgid "Gallery Modal Settings"
 msgstr ""
 
-#: gallery-modals.php:492
+#: gallery-modals.php:536
 msgid "Documentation"
 msgstr ""
 
-#: gallery-modals.php:492
+#: gallery-modals.php:536
 msgid "Support"
 msgstr ""
 
-#: gallery-modals.php:511
+#: gallery-modals.php:555
 msgid "Modal Preview Image"
 msgstr ""
 
-#: gallery-modals.php:513
+#: gallery-modals.php:557
 msgid "Modal Title"
 msgstr ""
 
-#: gallery-modals.php:516
+#: gallery-modals.php:560
 msgid "This is a preview of the modal text."
 msgstr ""
 
-#: gallery-modals.php:700
+#: gallery-modals.php:744
 msgid "Invalid input color format"
 msgstr ""
 

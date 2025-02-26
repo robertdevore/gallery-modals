@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gallery Modals\n"
 "POT-Creation-Date: 2025-02-03 01:21-0500\n"
-"PO-Revision-Date: 2025-02-03 01:22-0500\n"
+"PO-Revision-Date: 2025-02-25 21:14-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_MX\n"
@@ -173,7 +173,6 @@ msgid "There is no changelog available."
 msgstr "No está disponible la lista de cambios."
 
 #. Plugin URI of the plugin/theme
-#, fuzzy
 msgid "https://github.com/robertdevore/gallery-modals/"
 msgstr "https://github.com/robertdevore/gallery-modals/"
 
