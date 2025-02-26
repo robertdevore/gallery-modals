@@ -155,12 +155,14 @@ function gm_add_modal_to_footer() {
             <?php if ( ! $hide_description ) : ?>
                 <p id="gallery-modal-description"></p>
             <?php endif; ?>
+            <div class="gallery-buttons">
             <?php if ( ! $hide_download_button ) : ?>
                 <a id="gallery-download-link" href="" download><?php esc_html_e( 'Download', 'gallery-modals' ); ?></a>
             <?php endif; ?>
             <?php if ( ! $hide_details_button ) : ?>
                 <a id="gallery-details-link" href="" target="_blank"><?php esc_html_e( 'View Image Details', 'gallery-modals' ); ?></a>
             <?php endif; ?>
+            </div>
         </div>
     </div>
     <?php

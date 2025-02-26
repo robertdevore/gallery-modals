@@ -77,3 +77,14 @@
 .gallery-modal-content {
     padding: 20px;
 }
+
+.gallery-buttons {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.gallery-buttons a {
+    flex: 1 1 0;
+    text-align: center;
+}
